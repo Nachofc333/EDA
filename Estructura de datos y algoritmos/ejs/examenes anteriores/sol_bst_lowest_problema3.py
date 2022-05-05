@@ -120,30 +120,25 @@ class MyBST:
 
 
     def lwc(self,a,b):
-        """returns the lowest common ancestor of a and b"""
-        nodeA=self.find(a)
-        if nodeA==None:
+        node1 = self.find(a)
+        if node1 == None:
             return None
-        
-        nodeB=self.find(b)
-        if nodeB==None:
+        node2 = self.find(b)
+        if node2 == None:
             return None
+        return self._lwc(self.root, node1, node2)
 
-        return self._lwc(self.root,nodeA,nodeB)
-
-    def _lwc(self,node,nodeA,nodeB):
-        if node==None:
-            return None
-
-        if nodeA.elem<node.elem and nodeB.elem<node.elem:
-            return self._lwc(node.left,nodeA,nodeB)
-        
-        if nodeA.elem>node.elem and nodeB.elem>node.elem:
-            return self._lwc(node.right,nodeA,nodeB)
-
+    def _lwc(self, node, node1, node2):
+        if node is None:
+            return
+        if node1.elem<node.elem and node2.elem<node.elem:
+            return self._lwc(node.left, node1, node2)
+        if node1.elem>node.elem and node2.elem>node.elem:
+            return self._lwc(node.right, node1, node2)
         return node.elem
 
-import random
+
+
 tree=MyBST()
 
 values=[50,48,70,30,65,90,20,32,67,98,15,25,31,35,66,69,94,99]
